@@ -61,7 +61,7 @@
     {"name": "last_name", "type": "text", "min_length": 3, "max_length": 20},
     {"name": "gender", "type": "choice", "choices": {"male":"male", "female": "female"}},
     {"name": "dob", "type": "date", "not_blank": true},
-    {"name": "mobile_phone", "type": "text", "regex": "/[0-9]+/"}
+    {"name": "mobile_phone", "type": "text", "regex": "/^[0-9]+$/", "not_blank": true}
 ]</pre>
     </div>
 {% endblock %}
