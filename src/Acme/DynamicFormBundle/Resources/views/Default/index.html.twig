@@ -1,0 +1,67 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Homepage{% endblock %}
+{% block content %}
+    <div class="page-header">
+        <h1>Instructions</h1>
+    </div>
+    <div class="row">
+        <h3>Defining form</h3>
+        <p>Forms are described using JSON.</p>
+        <p>Form properties:</p>
+        <ul>
+            <li>name</li>
+            <li>fields</li>
+        </ul>
+        <p><strong>name</strong> must match pattern <em>/[a-z][a-z0-9_]+/</em> and must be unique</p>
+        <p><strong>fields</strong> must be an array of definition objects.</p>
+        <h3>Defining fields</h3>
+        <p>Fields can be described using two mandatory properties:</p>
+        <ul>
+            <li>name</li>
+            <li>type</li>
+        </ul>
+        <p><strong>name</strong> must match pattern <em>/[a-z][a-z0-9_]{0,63}/</em></p>
+        <p><strong>type</strong> can be one of the following field types:</p>
+        <ul>
+            <li>text, textarea</li>
+            <li>email</li>
+            <li>url</li>
+            <li>number (float)</li>
+            <li>integer</li>
+            <li>choice</li>
+            <li>date, time, datetime</li>
+            <li>checkbox</li>
+            <li>radio</li>
+        </ul>
+        <p><strong>text, textarea, email, url</strong> types can also be accompanied by validators:</p>
+        <ul>
+            <li>min_length</li>
+            <li>max_length</li>
+            <li>regex</li>
+        </ul>
+        <p><strong>choice</strong> should be accompanied by <strong>choices</strong> which is an array of options</p>
+        <p>Other validator properties:</p>
+        <ul>
+            <li>not_null</li>
+            <li>not_blank</li>
+        </ul>
+        <p>Decorator properties:</p>
+        <ul>
+            <li>label</li>
+            <li>attributes</li>
+        </ul>
+        <p><strong>attributes</strong> can be used to add more attributes to the rendered form element</p>
+    </div>
+    <div class="row">
+        <h3>Examples</h3>
+            <h4>Student form fields</h4>
+<pre>[
+    {"name": "first_name", "type": "text", "min_length": 3, "max_length": 20},
+    {"name": "last_name", "type": "text", "min_length": 3, "max_length": 20},
+    {"name": "gender", "type": "choice", "choices": {"male":"male", "female": "female"}},
+    {"name": "dob", "type": "date", "not_blank": true},
+    {"name": "mobile_phone", "type": "text", "regex": "/[0-9]+/"}
+]</pre>
+    </div>
+{% endblock %}

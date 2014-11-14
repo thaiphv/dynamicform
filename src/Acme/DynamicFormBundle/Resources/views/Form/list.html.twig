@@ -1,0 +1,37 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Dynamic Form List{% endblock %}
+{% block content %}
+    <div class="row">
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="alert alert-success" role="alert">{{ flashMessage }}</div>
+        {% endfor %}
+    </div>
+    <div class="page-header">
+        <h1>Dynamic Form List</h1>
+    </div>
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Form Name</th><th>Field Definitions</th><th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for form in formEntities %}
+                <tr>
+                    <td>{{ form.name }}</td>
+                    <td>{{ form.fields }}</td>
+                    <td>
+                        <a href="{{ path('_consume_form_new', {'dynamicFormName': form.name}) }}" class="btn btn-link">Use Form</a>
+                        <a href="{{ path('_consume_form_list', {'dynamicFormName': form.name}) }}" class="btn btn-link">List Submitted Items</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <a class="btn btn-default" href="{{ path('_form_describe') }}">Define New Form</a>
+    </div>
+{% endblock %}

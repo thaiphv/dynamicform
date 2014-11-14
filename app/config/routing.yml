@@ -1,0 +1,5 @@
+acme_dynamic_form:
+    resource: "@AcmeDynamicFormBundle/Controller/"
+    prefix:   /dynamicform
+    type: annotation
+

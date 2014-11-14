@@ -1,0 +1,4 @@
+services:
+    form_service:
+        class: Acme\DynamicFormBundle\Service\FormService
+        arguments: ["@doctrine"]

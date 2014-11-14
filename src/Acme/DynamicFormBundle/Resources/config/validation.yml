@@ -1,0 +1,14 @@
+Acme\DynamicFormBundle\Entity\DynamicForm:
+    properties:
+        name:
+            - NotBlank: ~
+            - Length:
+                min: 5
+                max: 255
+                minMessage: Form name must be at least {{ limit }} characters long
+                maxMessage: Form name cannot be longer than {{ limit }} characters long
+            - Regex:
+                pattern: /[a-z][a-z0-9]+/
+                message: Form name cannot contain non-alphanumeric characters
+        fields:
+            - NotBlank: ~

@@ -1,0 +1,25 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Edit Item{% endblock %}
+{% block content %}
+    <div class="page-header">
+        <h1>Edit Item</h1>
+    </div>
+    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+    {{ form_errors(form) }}
+
+    {% for name, field in form %}
+        {% if name != '_token' %}
+        <div class="form-group">
+            {{ form_label(field) }}
+            {{ form_errors(field) }}
+            {{ form_widget(field, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        {% endif %}
+    {% endfor %}
+
+    <button type="submit" class="btn btn-primary">Update</button>
+    <a href="{{ path('_consume_form_list', {'dynamicFormName': dynamicFormName}) }}" class="btn btn-link">Back To List</a>
+
+    {{ form_end(form) }}
+{% endblock %}

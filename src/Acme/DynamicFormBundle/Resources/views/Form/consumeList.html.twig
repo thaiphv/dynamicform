@@ -1,0 +1,52 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Dynamic Item List{% endblock %}
+{% block content %}
+    <div class="row">
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success" role="alert">{{ flashMessage }}</div>
+    {% endfor %}
+    </div>
+    <div class="page-header">
+        <h1>Dynamic Item List</h1>
+    </div>
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    {% for name, type in fieldTypes %}
+                    <th>{{ name }}</th>
+                    {% endfor %}
+                    <th>created_time</th>
+                    <th>modified_time</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for entity in entities %}
+                <tr>
+                    <td>{{ entity.id }}</td>
+                    {% for name, type in fieldTypes %}
+                        {% if type == 'date' %}
+                            <td>{{ attribute(entity, name) | date('Y-m-d') }}</td>
+                        {% elseif type == 'time' %}
+                            <td>{{ attribute(entity, name) | date('H:i:s') }}</td>
+                        {% elseif type == 'datetime' %}
+                            <td>{{ attribute(entity, name) | date('Y-m-d H:i:s') }}</td>
+                        {% else %}
+                            <td>{{ attribute(entity, name) }}</td>
+                        {% endif %}
+                    {% endfor %}
+                    <td>{{ entity.createdTime | date('Y-m-d H:i:s') }}</td>
+                    <td>{{ entity.modifiedTime | date('Y-m-d H:i:s') }}</td>
+                    <td><a href="{{ path('_consume_form_edit', {'dynamicFormName': dynamicFormName, 'id': entity.id}) }}">Edit</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <a class="btn btn-default" href="{{ path('_consume_form_new', {'dynamicFormName': dynamicFormName}) }}">Add New Item</a>
+    </div>
+{% endblock %}
