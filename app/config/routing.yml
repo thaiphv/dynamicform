@@ -3,3 +3,9 @@ acme_dynamic_form:
     prefix:   /dynamicform
     type: annotation
 
+root:
+    path: /
+    defaults:
+        _controller: FrameworkBundle:Redirect:urlRedirect
+        path: /dynamicform
+        permanent: true
