@@ -7,5 +7,5 @@ root:
     path: /
     defaults:
         _controller: FrameworkBundle:Redirect:urlRedirect
-        path: /dynamicform
+        path: /dynamicform/
         permanent: true
